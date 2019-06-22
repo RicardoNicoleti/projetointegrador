@@ -88,11 +88,20 @@ class MensalidadeController {
   async update ({ params, request, response }) {
       const id = request.input('id')
       const valorLiquido = request.input('valorLiquido')
-  
-      let mensalidade = await Mensalidade.find(id)
     
+      let mensalidade = await Mensalidade.find(id)
+
+      var data = new Date()
+      var dia  = data.getDate().toString()
+      var diaF = (dia.length == 1) ? '0'+dia : dia
+      var mes  = (data.getMonth()+1).toString() //+1 pois no getMonth Janeiro começa com zero.
+      var mesF = (mes.length == 1) ? '0'+mes : mes
+      var anoF = data.getFullYear()
+      
+      let dataPagamento = anoF+"/"+mesF+"/"+diaF
+
       mensalidade.valorPago = valorLiquido
-      mensalidade.dataPagamento = new Date()
+      mensalidade.dataPagamento = dataPagamento
       mensalidade.pagamentoRealizado = 1
 
       await mensalidade.save()

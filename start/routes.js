@@ -16,13 +16,15 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post('/register', 'AuthController.register');
-Route.post('/authenticate', "AuthController.authenticate");
-Route.resource('mensalidade', "MensalidadeController").apiOnly();
-Route.get('/mensalidade/mensalidadePaga/:id', "MensalidadeController.mensalidadePaga");
-Route.get('/mensalidade/mensalidadeApagar/:id', "MensalidadeController.mensalidadeApagar");
-Route.get('/boleto', "BoletoController.index");
-Route.post('/dadosBoleto/:id', "BoletoController.dadosBoleto");
-Route.get('/requerimento', "RequerimentoController.index");
-Route.post('/boleto/envioemail/:id', "BoletoController.envioEmail");
+Route.group(() => {
+    Route.post('/register', 'AuthController.register');
+    Route.post('/authenticate', "AuthController.authenticate");
+    Route.resource('mensalidade', "MensalidadeController").apiOnly();
+    Route.get('/mensalidade/mensalidadePaga/:id', "MensalidadeController.mensalidadePaga");
+    Route.get('/mensalidade/mensalidadeApagar/:id', "MensalidadeController.mensalidadeApagar");
+    Route.get('/boleto', "BoletoController.index");
+    Route.post('/dadosBoleto/:id', "BoletoController.dadosBoleto");
+    Route.get('/requerimento', "RequerimentoController.index");
+    Route.post('/boleto/envioemail/:id', "BoletoController.envioEmail");    
+}).prefix('api');
 
