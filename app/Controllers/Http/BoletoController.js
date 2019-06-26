@@ -3,7 +3,6 @@
 const Boleto = require('node-boleto').Boleto;
 const Database = use('Database')
 const Mail = use('Mail')
-const boletoTeste = require('boleto.js/src/boleto')
 
 class BoletoController {
 /**
@@ -15,10 +14,7 @@ class BoletoController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
-    
-  }
-    async dadosBoleto({params, request}){
+  async dadosBoleto({params, request}){
       const aluno = await Database.table('alunos').where('matricula', params.id).first();
       const data = request.all();
       var boleto = new Boleto({
